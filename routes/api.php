@@ -10,3 +10,13 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+
+Route::middleware(['auth:sanctum', 'admin'])->get('/admin-dashboard', function () {
+
+    return response()->json([
+        'message' => 'Welcome Admin'
+    ]);
+
+});
